@@ -1,0 +1,11 @@
+# Core (the tests run with just these + pytest)
+numpy>=1.24
+opencv-python>=4.8
+PyYAML>=6.0
+pytest>=7.0
+
+# Needed once placeholders are filled — uncomment as you go:
+# ultralytics>=8.2        # KPT-1: YOLOv11m-pose keypoint model
+# tensorflow>=2.13        # TRK-1: GridTrackNet (repo requires python 3.10)
+# simpleaudio>=1.0        # PLC-1: guided-placement beeps (laptop)
+# fastapi, uvicorn, websockets   # ARCH-1: real-time server

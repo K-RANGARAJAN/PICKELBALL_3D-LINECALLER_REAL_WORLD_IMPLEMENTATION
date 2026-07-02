@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+data/raw/
+data/frames/
+data/labels/
+data/tracker_labels/
+models/*.pt
+models/*.h5
+third_party/
+calls.json

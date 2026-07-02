@@ -1,0 +1,58 @@
+# =====================================================================
+# PICKLEBALL PHASE 2 — master configuration
+# Every tunable and every path lives here. Cookbook recipes reference
+# these keys by name. TUNE-* markers = values to calibrate on real data.
+# =====================================================================
+
+paths:
+  # PLACEHOLDER[KPT-1]: path to the court-keypoint model retrained on
+  # real-world (phone-view) frames. Cookbook Recipe 2.
+  keypoint_weights: "models/court_keypoints_realworld.pt"
+  # PLACEHOLDER[TRK-2]: GridTrackNet weights fine-tuned for pickleball.
+  # Until then you may point at the tennis weights (Recipe 5).
+  tracker_weights: "models/gridtracknet_pickleball.h5"
+  # PLACEHOLDER[TRK-1]: local clone of https://github.com/VKorpelshoek/GridTrackNet
+  gridtracknet_repo: "third_party/GridTrackNet"
+  data_root: "data"
+  intrinsics_dir: "calib/intrinsics"     # one yaml per camera (Recipe 1)
+
+capture:
+  fps: 60                                # locked capture setting (§5.1)
+  resolution: [1920, 1080]
+
+checkerboard:                            # §5.2 / Recipe 1
+  inner_corners: [9, 6]
+  square_size_mm: 25.0                   # TUNE-0: MEASURE your printed board!
+
+calibration:
+  ransac_thresh_px: 5.0                  # §4.5
+  min_inliers: 6                         # §4.7
+  lock_threshold_px: 8.0                 # §4.7
+  lock_window_s: 10.0
+
+sync:
+  clap_search_window_s: 5.0              # clap occurs near the start of each clip
+  energy_win_ms: 10.0
+  refine_with_xcorr: true
+
+tracking:
+  input_size: [768, 432]                 # GridTrackNet native input
+  frames_per_batch: 5                    # GridTrackNet 5-in / 5-out design
+  min_confidence: 0.30                   # TUNE-1
+
+bounce:                                  # §5.6–5.7 + separation-signal derivation
+  smooth_window_frames: 5                # Kalman/moving-average smoothing of s(t)
+  min_prominence_ft: 0.5                 # TUNE-2: prominence of an s(t) minimum
+  max_pair_gap_frames: 2                 # no real detection within this gap of a
+                                         # candidate -> that camera flagged occluded
+  vshape_min_fall_frames: 3              # single-view fallback: frames falling before V
+  subframe_refine: true                  # parabola-intersection sub-frame contact time
+
+fusion:                                  # §5.8
+  dispute_threshold_ft: 0.164            # TUNE-3: 5 cm; above this, arbitrate
+  weight_floor: 0.05                     # never let one camera's weight hit zero
+  reproj_err_scale_px: 3.0               # TUNE-4: reproj error -> weight decay scale
+
+line_call:
+  zone: "near_half"
+  margin_ft: 0.0
