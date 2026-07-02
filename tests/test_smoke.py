@@ -1,4 +1,4 @@
-"""Synthetic end-to-end validation — runs WITHOUT any real data or models.
+"""Synthetic end-to-end validation — runs WITHOUT any real data or model.
 
 Simulates a 3-D ball trajectory with a known bounce, projects it into two
 synthetic cameras using the EXACT displacement law from the derivation doc:
