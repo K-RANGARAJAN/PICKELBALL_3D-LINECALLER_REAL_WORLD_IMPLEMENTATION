@@ -1,4 +1,4 @@
-# Pickleball Linecaller — Phase 2 Hand-off Package
+# Pickleball Linecaller - Phase 2 Hand-off Package
 
 Implementation skeleton for **§5.1–5.9** of the Technical Disclosure
 (*Pickleball Linecaller — A Two-Camera Computer-Vision System*, June 2026)
