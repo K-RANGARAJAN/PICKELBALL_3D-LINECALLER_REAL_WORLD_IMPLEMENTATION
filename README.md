@@ -10,7 +10,7 @@ tagged `PLACEHOLDER[ID]` with a matching recipe in
 **Phase 1** (single-camera court calibration, completed) lives at:
 https://github.com/K-RANGARAJAN/Pickleball-automatic-court-calibration
 
-## The idea in one paragraph
+## The idea of the project in one paragraph using simple terms
 
 Two phones behind the near-baseline corners each calibrate themselves to the
 court by detecting 12 line-intersection keypoints and fitting a RANSAC
